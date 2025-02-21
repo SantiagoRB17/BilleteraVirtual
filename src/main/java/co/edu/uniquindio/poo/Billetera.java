@@ -1,25 +1,36 @@
 package co.edu.uniquindio.poo;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Billetera {
     private Usuario usuario;
-    private double saldo;
-    private String codigoUnico;
+    private float saldo;
+    private final float Costo =200;
 
-    public Billetera(Usuario usuario, double saldo) {
+    public Billetera(Usuario usuario, float saldo) {
         this.usuario = usuario;
         this.saldo = saldo;
-        this.codigoUnico = generarCodigoUnico();
     }
 
-    public String generarCodigoUnico() {
-        String codigoUnico = "";
-        for(int i=0; i<10; i++){
-            Random r = new Random();
-            codigoUnico = codigoUnico + r.nextInt(9);
-        }
-        return codigoUnico;
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public float getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(float saldo) {
+        this.saldo = saldo;
+    }
+
+    public float getCosto() {
+        return Costo;
     }
 
     @Override
@@ -27,7 +38,7 @@ public class Billetera {
         return "Billetera{" +
                 "usuario=" + usuario +
                 ", saldo=" + saldo +
-                ", codigoUnico='" + codigoUnico + '\'' +
+                ", Costo=" + Costo +
                 '}';
     }
 }
