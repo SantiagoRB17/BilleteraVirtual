@@ -6,6 +6,7 @@ public class GestionUsuario {
     private ArrayList<Usuario> usuarios;
 
     public GestionUsuario() {
+
         this.usuarios = new ArrayList<>();
     }
 

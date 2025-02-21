@@ -1,10 +1,11 @@
 package co.edu.uniquindio.poo;
 
+import java.util.ArrayList;
+
 public class Banco {
-    public GestionBilletera gestionBilletera;
     public GestionUsuario gestionUsuario;
+    public ArrayList<Billetera> billeteras ;
 
 
 
-    }
 }
