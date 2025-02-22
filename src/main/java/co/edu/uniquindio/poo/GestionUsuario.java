@@ -3,10 +3,11 @@ package co.edu.uniquindio.poo;
 import java.util.ArrayList;
 
 public class GestionUsuario {
+    private final Banco banco;
     private ArrayList<Usuario> usuarios;
 
-    public GestionUsuario() {
-
+    public GestionUsuario(Banco banco) {
+        this.banco = banco;
         this.usuarios = new ArrayList<>();
     }
 
