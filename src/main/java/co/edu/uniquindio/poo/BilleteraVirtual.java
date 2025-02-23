@@ -1,17 +1,17 @@
 package co.edu.uniquindio.poo;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-public class Billetera {
+public class BilleteraVirtual {
     private Usuario usuario;
     private float saldo;
     private final float Costo =200;
 
-    public Billetera(Usuario usuario, float saldo) {
+    public BilleteraVirtual(Usuario usuario, float saldo) {
         this.usuario = usuario;
         this.saldo = saldo;
     }
+
+
+
 
     public Usuario getUsuario() {
         return usuario;

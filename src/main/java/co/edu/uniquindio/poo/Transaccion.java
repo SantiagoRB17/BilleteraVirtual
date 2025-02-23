@@ -7,11 +7,11 @@ public class Transaccion {
     private UUID id;
     private LocalDateTime fecha;
     private Categoria categoria;
-    private GestionBilletera origen;
-    private GestionBilletera destino;
+    private BilleteraVirtual origen;
+    private BilleteraVirtual destino;
     private float monto;
 
-    public Transaccion(UUID id, LocalDateTime fecha, Categoria categoria, GestionBilletera origen, GestionBilletera destino, float monto) {
+    public Transaccion(UUID id, LocalDateTime fecha, Categoria categoria, BilleteraVirtual origen, BilleteraVirtual destino, float monto) {
         this.id = id;
         this.fecha = fecha;
         this.categoria = categoria;
