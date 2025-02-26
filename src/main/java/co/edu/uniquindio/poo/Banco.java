@@ -163,7 +163,6 @@ public class Banco {
 
         }
 
-
     }
 
     public void realizarTransaccion(String idUsuario, String idBilletera, Categoria categoria, float monto, BilleteraVirtual destinatario) throws Exception {
@@ -177,6 +176,17 @@ public class Banco {
 
         }
 
+    }
+
+    public void consultarSaldo(String idUsuario, String codigoBilletera){
+
+        for(BilleteraVirtual billetera : billeteras){
+            if(billetera.getUsuario().getId().equals(idUsuario) && billetera.getCodigoUnico().equals(codigoBilletera)){
+                billetera.consultarSaldo();
+                return;
+            }
+
+        }
     }
 
     public ArrayList<Usuario> getUsuarios() {

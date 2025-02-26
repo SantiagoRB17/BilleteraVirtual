@@ -211,6 +211,10 @@ public class BilleteraVirtual {
         System.out.println("La billetera ha sido desactivada");
     }
 
+    public void consultarSaldo(){
+        System.out.println("El saldo de la billetera con codigo" + codigoUnico + " y propietario " + usuario.getNombre() + " es: " + saldo);
+    }
+
     // Getters y Setters
     public Usuario getUsuario() {
         return usuario;
