@@ -146,6 +146,19 @@ public class Banco {
         return codigoUnico;
     }
 
+    public void desactivarBilletera(String idUsuario, String codigoUnico){
+
+        for(BilleteraVirtual billetera : billeteras){
+            if(billetera.getUsuario().getId().equals(idUsuario) && billetera.getCodigoUnico().equals(codigoUnico)){
+                billetera.desactivarBilletera();
+                return;
+            }
+
+        }
+
+
+    }
+
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
