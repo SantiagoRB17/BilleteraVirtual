@@ -14,6 +14,8 @@ public class BilleteraVirtual {
     private ArrayList<Transaccion> transacciones;
     private static final float COSTO = 200;
 
+
+
     /**
      * Constructor para crear una billetera virtual con un usuario y saldo inicial.
      * @param usuario Usuario propietario de la billetera.
@@ -26,6 +28,8 @@ public class BilleteraVirtual {
         this.codigoUnico = ""; // Generar un código único
         this.transacciones = new ArrayList<>(); // Inicializar la lista de transacciones
     }
+
+
 
     /**
      * Realiza una transacción entre la billetera actual (origen) y una billetera destinatario.
@@ -46,6 +50,31 @@ public class BilleteraVirtual {
         agregarTransaccion(transaccion);
         destinatario.agregarTransaccion(transaccion);
     }
+
+
+    public void recargarSaldo(float monto) throws Exception {
+        // Validar si el monto es positivo
+        if (monto <= 0) {
+            // Lanzar una excepción si el monto no es válido
+            throw new Exception("El monto a recargar debe ser positivo.");
+        }
+
+        // Actualizar el saldo
+        this.saldo += monto;
+
+        // Registrar la transacción de recarga
+        Categoria categoria = Categoria.FACTURAS; // O usa otra categoría que sea relevante
+        BilleteraVirtual origen = this; // La billetera origen es la actual
+        BilleteraVirtual destino = this; // La billetera destino es la misma
+        Transaccion recarga = new Transaccion(categoria, origen, destino, monto);
+
+        // Añadir la transacción a la lista de transacciones
+        transacciones.add(recarga);
+
+        // Imprimir el saldo actualizado
+        System.out.println("Recarga exitosa. Nuevo saldo: " + this.saldo);
+    }
+
 
     /**
      * Calcula el porcentaje de gastos e ingresos con respecto al total de transacciones.
@@ -83,6 +112,9 @@ public class BilleteraVirtual {
             }
         }
 
+
+
+
         // Calculamos el total de ingresos y gastos
         float total = gastos + ingresos;
         if (total <= 0) {
@@ -98,8 +130,11 @@ public class BilleteraVirtual {
         return new float[]{porcentajeGastos, porcentajeIngresos};
     }
 
-    public List<Transaccion> consultarTransaccionesPorPeriodo(LocalDateTime inicio, LocalDateTime fin) {
-        List<Transaccion> transaccionesEnPeriodo = new ArrayList<>();
+
+
+
+    public ArrayList<Transaccion> consultarTransaccionesPorPeriodo(LocalDateTime inicio, LocalDateTime fin) {
+        ArrayList<Transaccion> transaccionesEnPeriodo = new ArrayList<>();
 
         for (Transaccion transaccion : transacciones) {
             LocalDateTime fechaTransaccion = transaccion.getFecha();
@@ -113,6 +148,8 @@ public class BilleteraVirtual {
 
         return transaccionesEnPeriodo;
     }
+
+
 
     /**
      * Valida que el monto de la transacción sea positivo.
