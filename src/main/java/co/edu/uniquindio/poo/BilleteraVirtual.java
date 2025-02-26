@@ -2,6 +2,8 @@ package co.edu.uniquindio.poo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class BilleteraVirtual {
@@ -47,26 +49,50 @@ public class BilleteraVirtual {
      * Calcula el porcentaje de gastos e ingresos con respecto al total de transacciones.
      * @return Arreglo de floats donde [0] es porcentaje de gastos y [1] porcentaje de ingresos.
      */
-    public float[] porcentajeGastosIngresos() {
+    public float[] porcentajeGastosIngresos(int mes, int año) {
         float gastos = 0f;
         float ingresos = 0f;
 
+        // Usamos un Map para almacenar los gastos por categoría
+        Map<String, Float> gastosPorCategoria = new HashMap<>();
+
+        // Iteramos sobre todas las transacciones registradas en esta billetera
         for (Transaccion transaccion : transacciones) {
-            if (transaccion.getDestino() == this) {
-                ingresos += transaccion.getMonto();
-            } else if (transaccion.getOrigen() == this) {
-                gastos += transaccion.getMonto();
+            // Obtenemos el mes y año de la transacción
+            LocalDateTime fechaTransaccion = transaccion.getFecha();
+            int mesTransaccion = fechaTransaccion.getMonthValue();  // Mes de la transacción (1-12)
+            int añoTransaccion = fechaTransaccion.getYear();        // Año de la transacción
+
+            // Verificamos si la transacción pertenece al mes y año proporcionado
+            if (mesTransaccion == mes && añoTransaccion == año) {
+                // Si el destino es esta billetera, es un ingreso
+                if (transaccion.getDestino() == this) {
+                    ingresos += transaccion.getMonto();
+                }
+                // Si el origen es esta billetera, es un gasto
+                else if (transaccion.getOrigen() == this) {
+                    gastos += transaccion.getMonto();
+
+                    // Obtener la categoría de la transacción y agregarla al Map
+                    String categoria = transaccion.getCategoria().toString();  // Usamos el método toString() para obtener el nombre de la categoría
+                    // Acumulamos el gasto en la categoría correspondiente
+                    gastosPorCategoria.put(categoria, gastosPorCategoria.getOrDefault(categoria, 0f) + transaccion.getMonto());
+                }
             }
         }
 
+        // Calculamos el total de ingresos y gastos
         float total = gastos + ingresos;
         if (total <= 0) {
+            // Si no hay ingresos ni gastos, devolvemos 0 para ambos
             return new float[]{0f, 0f};
         }
 
+        // Calculamos los porcentajes de los gastos y los ingresos
         float porcentajeGastos = (gastos / total) * 100;
         float porcentajeIngresos = (ingresos / total) * 100;
 
+        // Devolvemos los porcentajes de gastos e ingresos
         return new float[]{porcentajeGastos, porcentajeIngresos};
     }
 
