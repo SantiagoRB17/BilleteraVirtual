@@ -98,7 +98,8 @@ public class BilleteraVirtual {
      * @throws Exception Si el monto excede el saldo disponible.
      */
     private void validarFondosSuficientes(float monto) throws Exception {
-        if (monto > saldo) {
+        float total = monto + COSTO;
+        if (total > saldo) {
             throw new Exception("Fondos insuficientes.");
         }
     }
@@ -137,7 +138,7 @@ public class BilleteraVirtual {
         if (monto < 0 && Math.abs(monto) > saldo) {
             throw new Exception("No se puede restar más saldo del disponible.");
         }
-        saldo += monto; // Se usa += para manejar tanto ingresos como egresos
+        saldo -= monto + COSTO;
     }
     /**
      * Consulta el saldo disponible en la billetera y lo imprime en consola.
