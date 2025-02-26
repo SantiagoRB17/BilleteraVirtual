@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public class BilleteraVirtual {
     private Usuario usuario;
+    private boolean estado;
     private float saldo;
     private final String codigoUnico;
     private ArrayList<Transaccion> transacciones;
@@ -18,6 +19,7 @@ public class BilleteraVirtual {
      */
     public BilleteraVirtual(Usuario usuario, float saldo) {
         this.usuario = usuario;
+        this.estado = true;
         this.saldo = saldo;
         this.codigoUnico = ""; // Generar un código único
         this.transacciones = new ArrayList<>(); // Inicializar la lista de transacciones
@@ -180,6 +182,11 @@ public class BilleteraVirtual {
         if (transaccion != null) {
             transacciones.add(transaccion);
         }
+    }
+
+    public void desactivarBilletera(){
+        estado = false;
+        System.out.println("La billetera ha sido desactivada");
     }
     // Getters y Setters
 
