@@ -4,5 +4,5 @@ public enum Categoria {
     VIAJE,
     FACTURAS,
     GASOLINA,
-    ROPA
+    ROPA,
 }

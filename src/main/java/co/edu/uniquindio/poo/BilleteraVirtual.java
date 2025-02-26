@@ -52,7 +52,7 @@ public class BilleteraVirtual {
     }
 
 
-    public void recargarSaldo(float monto) throws Exception {
+    public void recargarSaldo(float monto, Categoria categoria) throws Exception {
         // Validar si el monto es positivo
         if (monto <= 0) {
             // Lanzar una excepción si el monto no es válido
@@ -62,8 +62,6 @@ public class BilleteraVirtual {
         // Actualizar el saldo
         this.saldo += monto;
 
-        // Registrar la transacción de recarga
-        Categoria categoria = Categoria.FACTURAS; // O usa otra categoría que sea relevante
         BilleteraVirtual origen = this; // La billetera origen es la actual
         BilleteraVirtual destino = this; // La billetera destino es la misma
         Transaccion recarga = new Transaccion(categoria, origen, destino, monto);
