@@ -154,7 +154,7 @@ public class BilleteraVirtual {
      * @param monto Monto a validar.
      * @throws Exception Si el monto es menor o igual a cero.
      */
-    private static void validarMontoPositivo(float monto) throws Exception {
+    public static void validarMontoPositivo(float monto) throws Exception {
         if (monto <= 0) {
             throw new Exception("El monto debe ser positivo.");
         }
@@ -165,7 +165,7 @@ public class BilleteraVirtual {
      * @param categoria Categoría a validar.
      * @throws Exception Si la categoría es nula.
      */
-    private static void validarCategoria(Categoria categoria) throws Exception {
+    public static void validarCategoria(Categoria categoria) throws Exception {
         if (categoria == null) {
             throw new Exception("La categoría no puede ser nula.");
         }
@@ -176,7 +176,7 @@ public class BilleteraVirtual {
      * @param monto Monto a verificar.
      * @throws Exception Si el monto excede el saldo disponible.
      */
-    private void validarFondosSuficientes(float monto) throws Exception {
+    public void validarFondosSuficientes(float monto) throws Exception {
         float total = monto + COSTO;
         if (total > saldo) {
             throw new Exception("Fondos insuficientes.");
@@ -188,7 +188,7 @@ public class BilleteraVirtual {
      * @param destinatario Billetera destinatario a validar.
      * @throws Exception Si el destinatario es nulo o es la misma billetera de origen.
      */
-    private void validarDestinatario(BilleteraVirtual destinatario) throws Exception {
+    public void validarDestinatario(BilleteraVirtual destinatario) throws Exception {
         if (destinatario == null) {
             throw new Exception("La billetera destinatario no puede ser nula.");
         }
@@ -205,7 +205,7 @@ public class BilleteraVirtual {
      * @param destino Billetera de destino.
      * @return Objeto Transaccion creado.
      */
-    private Transaccion crearTransaccion(Categoria categoria, float monto, BilleteraVirtual origen, BilleteraVirtual destino) {
+    public Transaccion crearTransaccion(Categoria categoria, float monto, BilleteraVirtual origen, BilleteraVirtual destino) {
         return new Transaccion(categoria, origen, destino, monto);
     }
 
@@ -213,7 +213,7 @@ public class BilleteraVirtual {
      * Resta el monto de la transacción del saldo actual.
      * @param monto Monto a restar.
      */
-    private void actualizarSaldo(float monto) throws Exception {
+    public void actualizarSaldo(float monto) throws Exception {
         if (monto < 0 && Math.abs(monto) > saldo) {
             throw new Exception("No se puede restar más saldo del disponible.");
         }
@@ -224,7 +224,7 @@ public class BilleteraVirtual {
      * Recibe fondos y aumenta el saldo de la billetera.
      * @param monto Monto a agregar al saldo.
      */
-    private void recibirFondos(float monto) throws Exception {
+    public void recibirFondos(float monto) throws Exception {
         if (monto <= 0) {
             throw new Exception("El monto a recibir debe ser positivo.");
         }
@@ -235,7 +235,7 @@ public class BilleteraVirtual {
      * Agrega una transacción a la lista de transacciones de la billetera.
      * @param transaccion Transacción a agregar.
      */
-    private void agregarTransaccion(Transaccion transaccion) {
+    public void agregarTransaccion(Transaccion transaccion) {
         if (transaccion != null) {
             transacciones.add(transaccion);
         }
