@@ -7,14 +7,24 @@ public class Usuario {
     private String direccion;
     private Long telefono;
     private String id;
+    private String contraseña;
 
-    public Usuario(String nombre, String apellido, String correo, String direccion, Long telefono, String id) {
+    public Usuario(String nombre, String apellido, String correo, String direccion, Long telefono, String id, String contraseña) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.direccion = direccion;
         this.telefono = telefono;
         this.id = id;
+        this.contraseña = contraseña;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     public String getNombre() {
@@ -68,12 +78,13 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "nombre '" + nombre + '\'' +
-                ", apellido '" + apellido + '\'' +
-                ", correo '" + correo + '\'' +
-                ", direccion " + direccion +
-                ", telefono " + telefono +
-                ", id '" + id + '\'' +
+                "nombre='" + nombre + '\'' +
+                ", apellido='" + apellido + '\'' +
+                ", correo='" + correo + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", telefono=" + telefono +
+                ", id='" + id + '\'' +
+                ", contraseña='" + contraseña + '\'' +
                 '}';
     }
 }

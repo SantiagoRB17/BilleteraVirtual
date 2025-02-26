@@ -3,8 +3,8 @@ package co.edu.uniquindio.poo;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class BilleteraVirtual {
     private Usuario usuario;
@@ -12,7 +12,7 @@ public class BilleteraVirtual {
     private float saldo;
     private final String codigoUnico;
     private ArrayList<Transaccion> transacciones;
-    private static final  float COSTO = 200;
+    private static final float COSTO = 200;
 
     /**
      * Constructor para crear una billetera virtual con un usuario y saldo inicial.
@@ -98,6 +98,22 @@ public class BilleteraVirtual {
         return new float[]{porcentajeGastos, porcentajeIngresos};
     }
 
+    public List<Transaccion> consultarTransaccionesPorPeriodo(LocalDateTime inicio, LocalDateTime fin) {
+        List<Transaccion> transaccionesEnPeriodo = new ArrayList<>();
+
+        for (Transaccion transaccion : transacciones) {
+            LocalDateTime fechaTransaccion = transaccion.getFecha();
+
+            // Verificamos si la fecha de la transacción está dentro del periodo dado
+            if ((fechaTransaccion.isEqual(inicio) || fechaTransaccion.isAfter(inicio)) &&
+                    (fechaTransaccion.isEqual(fin) || fechaTransaccion.isBefore(fin))) {
+                transaccionesEnPeriodo.add(transaccion);
+            }
+        }
+
+        return transaccionesEnPeriodo;
+    }
+
     /**
      * Valida que el monto de la transacción sea positivo.
      * @param monto Monto a validar.
@@ -114,7 +130,7 @@ public class BilleteraVirtual {
      * @param categoria Categoría a validar.
      * @throws Exception Si la categoría es nula.
      */
-    private static  void validarCategoria(Categoria categoria) throws Exception {
+    private static void validarCategoria(Categoria categoria) throws Exception {
         if (categoria == null) {
             throw new Exception("La categoría no puede ser nula.");
         }
@@ -168,26 +184,6 @@ public class BilleteraVirtual {
         }
         saldo -= monto + COSTO;
     }
-    /**
-     * Consulta el saldo disponible en la billetera y lo imprime en consola.
-     */
-    private void consultarSaldo() {
-        System.out.println("Su saldo es de: " + saldo);
-    }
-
-    /**
-     * Muestra en consola todas las transacciones registradas en la billetera.
-     */
-    public void consultarTransacciones() {
-        if (transacciones.isEmpty()) {
-            System.out.println("No hay transacciones registradas.");
-        } else {
-            System.out.println("Historial de transacciones:");
-            for (Transaccion transaccion : transacciones) {
-                System.out.println(transaccion);
-            }
-        }
-    }
 
     /**
      * Recibe fondos y aumenta el saldo de la billetera.
@@ -210,12 +206,12 @@ public class BilleteraVirtual {
         }
     }
 
-    public void desactivarBilletera(){
+    public void desactivarBilletera() {
         estado = false;
         System.out.println("La billetera ha sido desactivada");
     }
-    // Getters y Setters
 
+    // Getters y Setters
     public Usuario getUsuario() {
         return usuario;
     }
@@ -236,8 +232,8 @@ public class BilleteraVirtual {
         return codigoUnico;
     }
 
-
     public void setCodigoUnico(String codigoUnico) {
+        // No se permite cambiar el código único
     }
 
     public ArrayList<Transaccion> getTransacciones() {
@@ -250,13 +246,12 @@ public class BilleteraVirtual {
 
     @Override
     public String toString() {
-        return "BilleteraVirtual " +
-                "usuario: " + usuario +
-                ", saldo: " + saldo +
-                ", codigoUnico: '" + codigoUnico + '\'' +
-                ", transacciones: " + transacciones +
-                '.';
+        return "BilleteraVirtual{" +
+                "usuario=" + usuario +
+                ", saldo=" + saldo +
+                ", codigoUnico='" + codigoUnico + '\'' +
+                ", transacciones=" + transacciones +
+                '}';
     }
-
-
 }
+
