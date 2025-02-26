@@ -44,7 +44,7 @@ public class BilleteraVirtual {
         validarFondosSuficientes(monto);
         validarDestinatario(destinatario);
 
-        Transaccion transaccion = new Transaccion(categoria, this, destinatario, monto);
+        Transaccion transaccion = crearTransaccion(categoria, monto, this, destinatario);
         actualizarSaldo(monto);
         destinatario.recibirFondos(monto);
         agregarTransaccion(transaccion);
@@ -246,8 +246,8 @@ public class BilleteraVirtual {
         System.out.println("La billetera ha sido desactivada");
     }
 
-    public void consultarSaldo(){
-        System.out.println("El saldo de la billetera con codigo" + codigoUnico + " y propietario " + usuario.getNombre() + " es: " + saldo);
+    public float consultarSaldo(){
+        return saldo;
     }
 
     // Getters y Setters
@@ -293,5 +293,4 @@ public class BilleteraVirtual {
                 '}';
     }
 }
-
 

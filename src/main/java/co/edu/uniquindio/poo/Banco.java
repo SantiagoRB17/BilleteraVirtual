@@ -178,15 +178,16 @@ public class Banco {
 
     }
 
-    public void consultarSaldo(String idUsuario, String codigoBilletera){
+    public float consultarSaldo(String idUsuario, String codigoBilletera) throws Exception{
 
         for(BilleteraVirtual billetera : billeteras){
             if(billetera.getUsuario().getId().equals(idUsuario) && billetera.getCodigoUnico().equals(codigoBilletera)){
-                billetera.consultarSaldo();
-                return;
-            }
+                return billetera.consultarSaldo();
 
+            }
         }
+
+        throw new Exception("No se encontro la billetera con el id " + idUsuario);
     }
 
     public ArrayList<Usuario> getUsuarios() {
