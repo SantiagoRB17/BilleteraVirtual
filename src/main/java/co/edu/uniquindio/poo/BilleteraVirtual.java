@@ -2,12 +2,14 @@ package co.edu.uniquindio.poo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class BilleteraVirtual {
     private Usuario usuario;
     private float saldo;
     private final String codigoUnico;
     private ArrayList<Transaccion> transacciones;
+    private static final  float COSTO = 200;
 
     /**
      * Constructor para crear una billetera virtual con un usuario y saldo inicial.
@@ -17,7 +19,8 @@ public class BilleteraVirtual {
     public BilleteraVirtual(Usuario usuario, float saldo) {
         this.usuario = usuario;
         this.saldo = saldo;
-        this.codigoUnico = "";
+        this.codigoUnico = UUID.randomUUID().toString(); // Generar un código único
+        this.transacciones = new ArrayList<>(); // Inicializar la lista de transacciones
     }
 
     /**
@@ -72,7 +75,7 @@ public class BilleteraVirtual {
      * @param monto Monto a validar.
      * @throws Exception Si el monto es menor o igual a cero.
      */
-    private void validarMontoPositivo(float monto) throws Exception {
+    private static void validarMontoPositivo(float monto) throws Exception {
         if (monto <= 0) {
             throw new Exception("El monto debe ser positivo.");
         }
@@ -83,7 +86,7 @@ public class BilleteraVirtual {
      * @param categoria Categoría a validar.
      * @throws Exception Si la categoría es nula.
      */
-    private void validarCategoria(Categoria categoria) throws Exception {
+    private static  void validarCategoria(Categoria categoria) throws Exception {
         if (categoria == null) {
             throw new Exception("La categoría no puede ser nula.");
         }
@@ -130,10 +133,12 @@ public class BilleteraVirtual {
      * Resta el monto de la transacción del saldo actual.
      * @param monto Monto a restar.
      */
-    private void actualizarSaldo(float monto) {
-        saldo -= monto;
+    private void actualizarSaldo(float monto) throws Exception {
+        if (monto < 0 && Math.abs(monto) > saldo) {
+            throw new Exception("No se puede restar más saldo del disponible.");
+        }
+        saldo += monto; // Se usa += para manejar tanto ingresos como egresos
     }
-
     /**
      * Consulta el saldo disponible en la billetera y lo imprime en consola.
      */
@@ -144,10 +149,14 @@ public class BilleteraVirtual {
     /**
      * Muestra en consola todas las transacciones registradas en la billetera.
      */
-    private void consultarTransacciones() {
-        System.out.println("Consultando transacciones...");
-        for (Transaccion transaccion : transacciones) {
-            System.out.println(transaccion);
+    public void consultarTransacciones() {
+        if (transacciones.isEmpty()) {
+            System.out.println("No hay transacciones registradas.");
+        } else {
+            System.out.println("Historial de transacciones:");
+            for (Transaccion transaccion : transacciones) {
+                System.out.println(transaccion);
+            }
         }
     }
 
@@ -155,7 +164,10 @@ public class BilleteraVirtual {
      * Recibe fondos y aumenta el saldo de la billetera.
      * @param monto Monto a agregar al saldo.
      */
-    private void recibirFondos(float monto) {
+    private void recibirFondos(float monto) throws Exception {
+        if (monto <= 0) {
+            throw new Exception("El monto a recibir debe ser positivo.");
+        }
         saldo += monto;
     }
 
@@ -164,9 +176,10 @@ public class BilleteraVirtual {
      * @param transaccion Transacción a agregar.
      */
     private void agregarTransaccion(Transaccion transaccion) {
-        transacciones.add(transaccion);
+        if (transaccion != null) {
+            transacciones.add(transaccion);
+        }
     }
-
     // Getters y Setters
 
     public Usuario getUsuario() {
