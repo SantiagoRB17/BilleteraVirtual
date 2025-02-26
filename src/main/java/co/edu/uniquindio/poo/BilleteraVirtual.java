@@ -44,7 +44,7 @@ public class BilleteraVirtual {
         validarFondosSuficientes(monto);
         validarDestinatario(destinatario);
 
-        Transaccion transaccion = crearTransaccion(categoria, monto, this, destinatario);
+        Transaccion transaccion = new Transaccion(categoria, this, destinatario, monto);
         actualizarSaldo(monto);
         destinatario.recibirFondos(monto);
         agregarTransaccion(transaccion);
@@ -293,4 +293,5 @@ public class BilleteraVirtual {
                 '}';
     }
 }
+
 
