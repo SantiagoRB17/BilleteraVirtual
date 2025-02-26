@@ -19,7 +19,7 @@ public class BilleteraVirtual {
     public BilleteraVirtual(Usuario usuario, float saldo) {
         this.usuario = usuario;
         this.saldo = saldo;
-        this.codigoUnico = UUID.randomUUID().toString(); // Generar un código único
+        this.codigoUnico = ""; // Generar un código único
         this.transacciones = new ArrayList<>(); // Inicializar la lista de transacciones
     }
 

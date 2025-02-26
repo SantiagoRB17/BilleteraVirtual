@@ -12,8 +12,8 @@ public class Transaccion {
     private float monto;
 
     public Transaccion(Categoria categoria, BilleteraVirtual origen, BilleteraVirtual destino, float monto) {
-        this.id = id; //Se debe crear de forma automatica
-        this.fecha = fecha; //Se deben crear automaticamente
+        this.id = UUID.randomUUID();
+        this.fecha = LocalDateTime.now();
         this.categoria = categoria;
         this.origen = origen;
         this.destino = destino;
