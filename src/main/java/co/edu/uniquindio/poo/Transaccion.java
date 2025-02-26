@@ -42,7 +42,6 @@ public class Transaccion {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
-        this.origen = origen;
     }
 
     public BilleteraVirtual getDestino() {
@@ -59,6 +58,14 @@ public class Transaccion {
 
     public void setMonto(float monto) {
         this.monto = monto;
+    }
+
+    public BilleteraVirtual getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(BilleteraVirtual origen) {
+        this.origen = origen;
     }
 
     @Override

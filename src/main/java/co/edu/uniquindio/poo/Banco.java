@@ -164,9 +164,9 @@ public class Banco {
 
     @Override
     public String toString() {
-        return "Banco{" +
-                "usuarios=" + usuarios +
-                ", billeteras=" + billeteras +
-                '}';
+        return "Banco: " +
+                "usuarios: " + usuarios +
+                ", billeteras: " + billeteras +
+                '.';
     }
 }
