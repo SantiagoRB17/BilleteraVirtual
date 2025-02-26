@@ -112,6 +112,15 @@ public class BilleteraVirtual {
         return codigoUnico;
     }
 
+    public void setCodigoUnico(String codigoUnico) {}
+
+    public ArrayList<Transaccion> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(ArrayList<Transaccion> transacciones) {
+        this.transacciones = transacciones;
+    }
 
     @Override
     public String toString() {
